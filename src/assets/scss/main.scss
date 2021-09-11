@@ -1,0 +1,12 @@
+/*Load vendor first (Load css/sass 
+version of bootstrap as per your needs)*/
+
+@import "/node_modules/bootstrap/scss/bootstrap.scss";
+
+/*Then app theme*/
+@import "app/_var";
+
+/*After that app typography, base, state, layout 
+and modules accordingly*/
+
+@import "app/_base";
