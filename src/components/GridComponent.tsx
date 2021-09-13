@@ -3,8 +3,9 @@ import { CartItemType } from "../interface/CartItemType";
 
 type Props = {
   products: CartItemType[];
+  handleAddItemToCart: (clickedItem: CartItemType) => void;
 };
-const GridComponent: React.FC<Props> = ({ products }) => {
+const GridComponent: React.FC<Props> = ({ products, handleAddItemToCart }) => {
   // As React cannot render as array so create a function then put in empty or
   // React.Fragment
   const showProducts = products.map((product: CartItemType) => {
@@ -14,7 +15,12 @@ const GridComponent: React.FC<Props> = ({ products }) => {
         <div className="card-body">
           <h5 className="card-title">{product.title}</h5>
           <p className="card-text">{product.description}</p>
-          <button className="btn btn-primary">Add to Cart</button>
+          <button
+            className="btn btn-primary"
+            onClick={() => handleAddItemToCart(product)}
+          >
+            Add to Cart
+          </button>
         </div>
       </div>
     );
