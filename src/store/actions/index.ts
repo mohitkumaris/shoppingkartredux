@@ -1,5 +1,5 @@
 import cart from "../../apis/cart";
-import { CartItemType } from "../../types/CartItemType";
+import { CartItemType } from "../../interface/CartItemType";
 import * as actions from "../actionTypes";
 
 export const getProducts = () => async (dispatch: any) => {

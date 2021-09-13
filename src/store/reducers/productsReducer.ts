@@ -1,5 +1,5 @@
 import * as actions from "../actionTypes";
-import { CartItemType } from "../../types/CartItemType";
+import { CartItemType } from "../../interface/CartItemType";
 
 const INITIAL_STATE: CartItemType[] = [];
 
