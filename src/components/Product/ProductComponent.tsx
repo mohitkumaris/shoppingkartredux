@@ -13,7 +13,13 @@ import { Wrapper, StyledButton } from "./Product.styles";
 // Types
 import { CartItemType } from "../../interface/CartItemType";
 import { State } from "../../interface/StateType";
-import { addCart, getCart, removeCart, getProducts } from "../../store/actions";
+import {
+  addCart,
+  addCartSuccess,
+  removeCart,
+  getProducts,
+  removeCartSucess,
+} from "../../store/actions";
 
 type Props = {
   getProducts(): void;
@@ -26,11 +32,11 @@ const ProductComponent = (props: Props) => {
   const dispatch = useDispatch();
   const handleAddItemToCart = (item: CartItemType) => {
     dispatch(addCart(item));
-    dispatch(getCart());
+    dispatch(addCartSuccess());
   };
   const handleRemoveCart = (item: CartItemType) => {
     dispatch(removeCart(item));
-    dispatch(getCart());
+    dispatch(removeCartSucess());
   };
   const getTotalItems = (items: CartItemType[]) =>
     items.reduce((ack: number, item) => ack + item.amount, 0);
@@ -68,6 +74,10 @@ const ProductComponent = (props: Props) => {
   );
 };
 
-export default connect(null, { getProducts, getCart, addCart, removeCart })(
-  ProductComponent
-);
+export default connect(null, {
+  getProducts,
+  addCartSuccess,
+  addCart,
+  removeCart,
+  removeCartSucess,
+})(ProductComponent);

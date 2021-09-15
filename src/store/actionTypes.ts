@@ -2,3 +2,5 @@ export const GET_PRODUCTS = "GET_PRODUCTS";
 export const ADD_CART = "ADD_CART";
 export const ADD_CART_SUCCESS = "ADD_CART_SUCCESS";
 export const REMOVE_CART = "REMOVE_CART";
+export const REMOVE_CART_SUCCESS = "REMOVE_CART_SUCCESS";
+export const ERROR_OCCURED = "ERROR_OCCURED";
