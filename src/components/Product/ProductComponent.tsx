@@ -7,6 +7,7 @@ import Drawer from "@material-ui/core/Drawer";
 import Grid from "@material-ui/core/Grid";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import Badge from "@material-ui/core/Badge";
+import LinearProgress from "@material-ui/core/LinearProgress";
 // Styles
 import { Wrapper, StyledButton } from "./Product.styles";
 // Types
@@ -36,6 +37,12 @@ const ProductComponent = (props: Props) => {
   useEffect(() => {
     props.getProducts();
   }, [props]);
+  if (!products.length)
+    return (
+      <div>
+        <LinearProgress />
+      </div>
+    );
   return (
     <Wrapper>
       <Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
