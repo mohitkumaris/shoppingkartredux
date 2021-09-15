@@ -10,3 +10,9 @@ export const getProducts = () => async (dispatch: any) => {
 export const addCart = (item: CartItemType) => {
   return { type: actions.ADD_CART, payload: item };
 };
+export const getCart = () => {
+  return { type: actions.ADD_CART_SUCCESS };
+};
+export const removeCart = (item: CartItemType) => {
+  return { type: actions.REMOVE_CART, payload: item };
+};

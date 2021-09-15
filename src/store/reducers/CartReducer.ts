@@ -20,6 +20,17 @@ const cartReducers = (
       }
       // First time the item is added
       return [...state, { ...action.payload, amount: 1 }];
+    case actions.ADD_CART_SUCCESS:
+      return state;
+    case actions.REMOVE_CART:
+      return state.reduce((ack, item) => {
+        if (item.id === action.payload.id) {
+          if (item.amount === 1) return ack;
+          return [...ack, { ...item, amount: item.amount - 1 }];
+        } else {
+          return [...ack, item];
+        }
+      }, [] as CartItemType[]);
 
     default:
       return state;

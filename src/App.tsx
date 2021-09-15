@@ -1,14 +1,12 @@
+import ProductComponent from "./components/Product/ProductComponent";
 import React from "react";
-import "./App.css";
-import ProductGridComponent from "./components/ProductComponent";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <h1>Products</h1>
-      <ProductGridComponent />
-    </div>
+    <React.Fragment>
+      <ProductComponent />
+    </React.Fragment>
   );
-}
+};
 
 export default App;
