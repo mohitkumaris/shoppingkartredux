@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@interface/*": ["interface/*"],
+      "@store/actions/*": ["store/actions/*"],
+      "@components/Cart/*": ["components/Cart/*"]
+    }
+  }
+}
