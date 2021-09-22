@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 import { useSelector, useDispatch, connect } from "react-redux";
 import useDebounce from "../../hooks/useDebounce";
 // Components
@@ -24,24 +24,45 @@ import {
 } from "../../store/actions";
 import Box from "@material-ui/core/Box";
 
-type Props = {
-  getProducts(): void;
+type Action = {
+  type: string;
+};
+type ProductState = {
+  cartOpenClose: boolean;
 };
 
-const ProductComponent = (props: Props) => {
-  const [cartOpen, setCartOpen] = useState(false);
+const productReducer = (state: ProductState, action: Action) => {
+  switch (action.type) {
+    case "openCart":
+      return { ...state, cartOpenClose: true };
+    case "closeCart":
+      return { ...state, cartOpenClose: false };
+
+    default:
+      return state;
+  }
+};
+
+const initialState: ProductState = {
+  cartOpenClose: false,
+};
+
+const ProductComponent = () => {
+  // const [cartOpen, setCartOpen] = useState(false);
   const [textValue, setTextValue] = useState("");
   const [search, setSearch] = useState("");
+  const [state, dispatch] = useReducer(productReducer, initialState);
+  const { cartOpenClose } = state;
   const products = useSelector((state: State) => state.products);
   const cartItems = useSelector((state: State) => state.cart);
-  const dispatch = useDispatch();
+  const dispatchActions = useDispatch();
   const handleAddItemToCart = (item: CartItemType) => {
-    dispatch(addCart(item));
-    dispatch(addCartSuccess());
+    dispatchActions(addCart(item));
+    dispatchActions(addCartSuccess());
   };
   const handleRemoveCart = (item: CartItemType) => {
-    dispatch(removeCart(item));
-    dispatch(removeCartSucess());
+    dispatchActions(removeCart(item));
+    dispatchActions(removeCartSucess());
   };
   const getTotalItems = (items: CartItemType[]) =>
     items.reduce((ack: number, item) => ack + item.amount, 0);
@@ -54,8 +75,10 @@ const ProductComponent = (props: Props) => {
   };
 
   useEffect(() => {
-    props.getProducts();
-  }, [props]);
+    dispatchActions(getProducts());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   if (!products.length)
     return (
       <div>
@@ -64,14 +87,18 @@ const ProductComponent = (props: Props) => {
     );
   return (
     <Wrapper>
-      <Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
+      <Drawer
+        anchor="right"
+        open={cartOpenClose}
+        onClose={() => dispatch({ type: "closeCart" })}
+      >
         <Cart
           cartItems={cartItems}
           addToCart={handleAddItemToCart}
           removeFromCart={handleRemoveCart}
         />
       </Drawer>
-      <StyledButton onClick={() => setCartOpen(true)}>
+      <StyledButton onClick={() => dispatch({ type: "openCart" })}>
         <Badge badgeContent={getTotalItems(cartItems)} color="error">
           <AddShoppingCartIcon />
         </Badge>
