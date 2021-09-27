@@ -1,5 +1,5 @@
 import { useState, useEffect, useReducer } from "react";
-import { useSelector, useDispatch, connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import useDebounce from "../../hooks/useDebounce";
 // Components
 import Item from "../../components/Item/Item";
@@ -37,7 +37,6 @@ const productReducer = (state: ProductState, action: Action) => {
       return { ...state, cartOpenClose: true };
     case "closeCart":
       return { ...state, cartOpenClose: false };
-
     default:
       return state;
   }
@@ -90,8 +89,7 @@ const ProductComponent = () => {
       <Drawer
         anchor="right"
         open={cartOpenClose}
-        onClose={() => dispatch({ type: "closeCart" })}
-      >
+        onClose={() => dispatch({ type: "closeCart" })}>
         <Cart
           cartItems={cartItems}
           addToCart={handleAddItemToCart}
@@ -107,8 +105,7 @@ const ProductComponent = () => {
         sx={{
           width: 1000,
           maxWidth: "100%",
-        }}
-      >
+        }}>
         <TextField
           fullWidth
           value={textValue}
@@ -128,10 +125,4 @@ const ProductComponent = () => {
   );
 };
 
-export default connect(null, {
-  getProducts,
-  addCartSuccess,
-  addCart,
-  removeCart,
-  removeCartSucess,
-})(ProductComponent);
+export default ProductComponent;
