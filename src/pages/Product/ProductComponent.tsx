@@ -1,4 +1,5 @@
 import { useState, useEffect, useReducer } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import useDebounce from "../../hooks/useDebounce";
 // Components
