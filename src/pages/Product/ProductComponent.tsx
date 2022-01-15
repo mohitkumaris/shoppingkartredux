@@ -1,7 +1,7 @@
-import { useState, useEffect, useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import useDebounce from "../../hooks/useDebounce";
+// import useDebounce from "../../hooks/useDebounce";
 // Components
 import Item from "../../components/Item/Item";
 import Cart from "../../components/Cart/Cart";
@@ -10,7 +10,7 @@ import Grid from "@material-ui/core/Grid";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import Badge from "@material-ui/core/Badge";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import TextField from "@material-ui/core/TextField";
+// import TextField from "@material-ui/core/TextField";
 // Styles
 import { Wrapper, StyledButton } from "./Product.styles";
 // Types
@@ -49,8 +49,8 @@ const initialState: ProductState = {
 
 const ProductComponent = () => {
   // const [cartOpen, setCartOpen] = useState(false);
-  const [textValue, setTextValue] = useState("");
-  const [search, setSearch] = useState("");
+  // const [textValue, setTextValue] = useState("");
+  //const [search, setSearch] = useState("");
   const [state, dispatch] = useReducer(productReducer, initialState);
   const { cartOpenClose } = state;
   const products = useSelector((state: State) => state.products);
@@ -66,13 +66,13 @@ const ProductComponent = () => {
   };
   const getTotalItems = (items: CartItemType[]) =>
     items.reduce((ack: number, item) => ack + item.amount, 0);
-  const searchFn = useDebounce((text: string) => setSearch(text), 1000);
+  // //const searchFn = useDebounce((text: string) => setSearch(text), 1000);
 
-  const handleSearch = (e: any) => {
-    const searchValue = e.target.value;
-    setTextValue(searchValue);
-    searchFn(e.target.value);
-  };
+  // const handleSearch = (e: any) => {
+  //   const searchValue = e.target.value;
+  //   setTextValue(searchValue);
+  //   searchFn(e.target.value);
+  // };
 
   useEffect(() => {
     dispatchActions(getProducts());
@@ -107,14 +107,14 @@ const ProductComponent = () => {
           width: 1000,
           maxWidth: "100%",
         }}>
-        <TextField
+        {/* <TextField
           fullWidth
           value={textValue}
           onChange={(e) => handleSearch(e)}
           variant="outlined"
-        />
+        /> */}
       </Box>
-      Search Text: <label> {search} </label>
+      {/* Search Text: <label> {search} </label> */}
       <Grid container spacing={3}>
         {products?.map((item) => (
           <Grid item key={item.id} xs={12} sm={4}>
