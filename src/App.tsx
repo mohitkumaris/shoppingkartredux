@@ -1,10 +1,12 @@
-import ProductComponent from "./pages/Product/ProductComponent";
+//import ProductComponent from "./pages/Product/ProductComponent";
 import React from "react";
+import LoginComponent from "components/Login/LoginComponent";
 
 const App = () => {
   return (
     <React.Fragment>
-      <ProductComponent />
+      <LoginComponent />
+      {/* <ProductComponent /> */}
     </React.Fragment>
   );
 };
